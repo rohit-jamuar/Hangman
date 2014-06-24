@@ -47,9 +47,9 @@ def hello():
      - lost   			 : count of games lost
      - won  			 : count of games won
      - answer 			 : randomly selected word
-     - answer_so_far 	 : answer formed by combining guesses presented by player
-     - chars_encountered : set containing character chosen by player
-     - chance_number 	 : count of the chances elapsed.
+     - answer_so_far 	 	 : answer formed by combining guesses presented by player
+     - chars_encountered 	 : set containing character chosen by player
+     - chance_number 	 	 : count of the chances elapsed.
      - is_new_game 		 : used to maintain the current status of game
 
     '''
