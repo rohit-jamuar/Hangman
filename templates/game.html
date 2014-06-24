@@ -1,0 +1,73 @@
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <title>Hangman!</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" media="screen">
+
+        <style type="text/css">
+          .row {
+            max-width: 1200px;
+            padding-top: 40px;
+            padding-left: 50px;
+            padding-right: 50px;
+            text-align: center;
+          }
+
+        </style>
+
+      </head>
+
+      <body>
+
+          <div class="row">
+                <h1 center>
+                  Welcome {{player_name}}!
+                </h1>
+                <h2 center>
+                  Statistics : Won - {{ wins }} / Lost - {{ losses }}
+                </h2>
+           </div>
+
+          <div class="row">
+              <div class="col-lg-8">
+                <div class="container">
+                    
+                    {% if pattern %}
+                    <p>
+                      {% for char in pattern %}
+                        <input type="button" value="{{char}}" class="btn btn-default btn-lg">
+                      {% endfor %}
+                    </p>
+                    {% endif %}
+                    
+                    {% if buttons %}
+                    <form method="post" action="/game/{{player_name}}" autocomplete="off">
+                      <div class="columwrapper">
+                        {% for column in buttons|slice(3) %}
+                          <div class="btn-group">
+                          {% for item in column %}
+                              <input type="submit" name="name" value="{{item}}" class="btn btn-primary btn-sm">
+                          {% endfor %}
+                          </div>
+                          <br>
+                        {% endfor %}
+                      </div>
+                    </form>
+                    {% endif %}
+                </div>
+              </div>
+
+              <div class="col-lg-4">
+                <div class="container">
+                  <pre>
+                    <p align="left"> {{ gallows }} </p>
+                  </pre>
+                </div>
+              </div>
+          </div>
+          <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+          <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+      </body>
+    </html>
+
