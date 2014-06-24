@@ -103,38 +103,36 @@ def hangman_game(name):
     name = name.strip()
     char_input = request.form['name'].strip()
     
-    if char_input not in session_details[name]['chars_encountered']:
-
-        session_details[name]['is_new_game'] = False
-        session_details[name]['chars_encountered'].add(char_input)
-
-        if char_input in session_details[name]['answer']:
-            temp = session_details[name]['answer_so_far']
-            stored_answer = session_details[name]['answer']
-            
-            for i in range(len(temp)):
-                if temp[i] == '-' and stored_answer[i] == char_input:
-                    temp = temp[:i] + char_input + temp[i+1:]
-            session_details[name]['answer_so_far'] = temp
-        else:
-            session_details[name]['chance_number'] += 1
-
+    session_details[name]['is_new_game'] = False
+    session_details[name]['chars_encountered'].add(char_input)
+    
+    if char_input in session_details[name]['answer']:
+        temp = session_details[name]['answer_so_far']
+        stored_answer = session_details[name]['answer']
+        
+        for i in range(len(temp)):
+            if temp[i] == '-' and stored_answer[i] == char_input:
+                temp = temp[:i] + char_input + temp[i+1:]
+        session_details[name]['answer_so_far'] = temp
+    else:
+        session_details[name]['chance_number'] += 1
+    
+    if session_details[name]['answer_so_far'] ==  session_details[name]['answer'] :    
+        session_details[name]['is_new_game'] = True
+        session_details[name]['won'] += 1
+        dump_session_details()
+        
+        return redirect(url_for('hello')+'?name=%s&token=%s'%(name, hash(name)))
+    
+    if session_details[name]['chance_number'] == 10:
+        session_details[name]['is_new_game'] = True
         if session_details[name]['answer_so_far'] ==  session_details[name]['answer'] :    
-            session_details[name]['is_new_game'] = True
             session_details[name]['won'] += 1
-            dump_session_details()
-            
-            return redirect(url_for('hello')+'?name=%s&token=%s'%(name, hash(name)))
-
-        if session_details[name]['chance_number'] == 10:
-            session_details[name]['is_new_game'] = True
-            if session_details[name]['answer_so_far'] ==  session_details[name]['answer'] :    
-                session_details[name]['won'] += 1
-            else:
-                session_details[name]['lost'] += 1
-            dump_session_details()
-            
-            return redirect(url_for('hello')+'?name=%s&token=%s'%(name, hash(name)))
+        else:
+            session_details[name]['lost'] += 1
+        dump_session_details()
+    
+        return redirect(url_for('hello')+'?name=%s&token=%s'%(name, hash(name)))
 
     characters_guessed = session_details[name]['chars_encountered']
     dump_session_details()
