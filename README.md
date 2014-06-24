@@ -1,6 +1,6 @@
 # Hangman
 
-Game of Hangman which supports multiplayer gameplay. Game is constructed as a web-app which maintains existing state (wins/losses) of games of various playes.
+Game of Hangman which supports multiplayer gameplay. Game is constructed as a web-app which maintains existing state (wins/losses) of games (for various players).
 
 ## Requirements:
 1. Python 2.6+
