@@ -55,8 +55,8 @@ def hello():
     '''
     if request.method == 'POST':
         name = request.form['name'].strip()
-    elif 'token' in request.args:
-        if str(hash(request.args['name'])) == request.args['token']:
+    elif 'name' in request.args and 'token' in request.args:
+        if request.args['name'] in session_details and str(hash(request.args['name'])) == request.args['token']:
             name = request.args.get('name').strip()
         else:
             return redirect(url_for('welcome'))
