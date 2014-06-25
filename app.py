@@ -53,14 +53,22 @@ def hello():
      - is_new_game 		 : used to maintain the current status of game
 
     '''
+    redirect_now = False
+
     if request.method == 'POST':
         name = request.form['name'].strip()
     elif 'name' in request.args and 'token' in request.args:
-        if request.args['name'] in session_details and str(hash(request.args['name'])) == request.args['token']:
-            name = request.args.get('name').strip()
+        if request.args['name'] in session_details:
+            if str(hash(request.args['name'])) == request.args['token']:
+                name = request.args.get('name').strip()
+            else:
+                redirect_now = True
         else:
-            return redirect(url_for('welcome'))
+            redirect_now = True
     else:
+        redirect_now = True
+
+    if redirect_now:
         return redirect(url_for('welcome'))
     
     global session_details
