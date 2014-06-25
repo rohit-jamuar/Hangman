@@ -44,13 +44,13 @@ def hello():
        the internal mechanism. All POST interactions are with the player.
     
     -- Inside 'session_details' DS:
-     - lost   			 : count of games lost
-     - won  			 : count of games won
-     - answer 			 : randomly selected word
+     - lost   			     : count of games lost
+     - won  			     : count of games won
+     - answer 			     : randomly selected word
      - answer_so_far 	 	 : answer formed by combining guesses presented by player
      - chars_encountered 	 : set containing character chosen by player
      - chance_number 	 	 : count of the chances elapsed.
-     - is_new_game 		 : used to maintain the current status of game
+     - is_new_game 		     : used to maintain the current status of game
 
     '''
     redirect_now = False
@@ -71,8 +71,6 @@ def hello():
     if redirect_now:
         return redirect(url_for('welcome'))
     
-    global session_details
-
     if name not in session_details:
         session_details[name] = {'won':0, 'lost':0, 'is_new_game': True}
     session_details[name]['answer'] = choice(words)
