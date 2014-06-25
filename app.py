@@ -104,8 +104,6 @@ def hangman_game(name):
             game midway.
     '''
     
-    global session_details
-    
     name = name.strip()
     char_input = request.form['name'].strip()
     
