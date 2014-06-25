@@ -70,8 +70,6 @@ def hello():
 
     if redirect_now:
         return redirect(url_for('welcome'))
-    
-    global session_details
 
     if name not in session_details:
         session_details[name] = {'won':0, 'lost':0, 'is_new_game': True}
