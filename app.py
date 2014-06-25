@@ -70,11 +70,7 @@ def hello():
 
     if redirect_now:
         return redirect(url_for('welcome'))
-<<<<<<< HEAD
-    
-=======
-
->>>>>>> 3704256266b2709f9c5d9dfcbee3c78dcbf97f50
+        
     if name not in session_details:
         session_details[name] = {'won':0, 'lost':0, 'is_new_game': True}
     session_details[name]['answer'] = choice(words)
